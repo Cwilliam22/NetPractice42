@@ -1,0 +1,12 @@
+
+You will configure small-scale networks.
+
+(Notions)
+
+TCP/IP addressing 
+Subnet mask
+Default gateway
+
+10 levels
+
+Solving networking problems to make a network function properly.
