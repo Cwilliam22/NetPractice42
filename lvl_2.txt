@@ -1,0 +1,109 @@
+
+Ce niveau est similaire au niveau mais avec plus de parametres a prendre en
+compte, notamment le masque de sous-réseau.
+
+--------------------------------------------------------------------------------
+C’est quoi le masque ?
+
+	C’est une adresse binaire de 32 bits (comme une IP), composée de :
+		1 pour les bits appartenant au réseau (partie fixe),
+		0 pour les bits appartenant à l’hôte (partie variable).
+
+	Exemple :
+	255.255.255.0 → en binaire : 11111111.11111111.11111111.00000000
+		Les 24 premiers bits sont le réseau, les 8 derniers sont pour les hôtes.
+
+--------------------------------------------------------------------------------
+À quoi sert-il ?
+
+	Déterminer si deux machines sont dans le même réseau :
+	En comparant les adresses IP ET les masques, on peut savoir si elles peuvent
+	communiquer directement (sans routeur).
+
+	Définir la taille du réseau :
+		Plus le masque a de bits à 1, plus le réseau est petit (moins d’hôtes
+		possibles).
+
+	Calculer l’adresse du réseau :
+		En faisant un ET logique entre l’IP et le masque.
+
+--------------------------------------------------------------------------------
+Comment l’écrire ?
+
+	Il existe 3 notations courantes :
+
+		1. Notation décimale pointée (la plus courante)
+		Exemple :
+			255.255.255.0
+
+		2. Notation CIDR (Classless Inter-Domain Routing) → /24, /30, etc.
+		→ Indique le nombre de bits à 1 dans le masque.
+		Exemple :
+			/30 = 30 bits à 1 → masque 255.255.255.252
+
+		3. Notation binaire (rarement utilisée en pratique)
+		Exemple :
+			11111111.11111111.11111111.11111100
+
+--------------------------------------------------------------------------------
+Est ce que deux machines qui doivent se connecter peuvent avoir un Mask different ?
+
+	-> Non
+	Deux machines qui doivent communiquer directement (sans routeur) doivent
+	obligatoirement avoir le même masque de sous-réseau.
+
+	Pour une communication directe (sans routeur), les deux machines doivent avoir :
+		-> Le même masque,
+		-> Et être dans le même réseau (même adresse réseau calculée).
+
+--------------------------------------------------------------------------------
+Comment calculer le nombre d'adresse disponibles a partir du Mask de sous-reseau ?
+
+Le masque de sous-réseau permet de calculer le nombre d’adresses IP disponibles
+dans un réseau, mais pas toutes sont utilisables pour les machines.
+
+	Masque /24 → bits hôtes = 32 – 24 = 8 bits → 2⁸ = 256 adresses
+	Masque /30 → bits hôtes = 2 → 2² = 4 adresses
+
+Dans les adresses disponibles il y en a 2 qui sont deja reservees.
+	- Adresse réseau → la première (tous les bits hôtes à 0)
+		-> non utilisable pour une machine
+	- Adresse de diffusion (broadcast) -> la dernière (tous les bits hôtes à 1)
+		-> non utilisable pour une machine
+
+--------------------------------------------------------------------------------
+Les adresses 127.x.x.x ne peuvent pas être utilisées pour la communication entre
+deux machines sur un réseau privé.
+
+Elles sont réservées par le protocole IPv4 pour le loopback (communication interne
+à l’ordinateur lui-même). Aucun trafic réseau ne peut sortir d’une machine vers
+une autre en utilisant ces adresses.
+
+1. Le réseau 127.0.0.0/8 (toutes les adresses 127.x.x.x) est réservé au loopback
+	RFC 1122 (1989) et RFC 5735 (2010) le confirment.
+	Toute adresse dans 127.0.0.0 à 127.255.255.255 est réservée.
+
+	Seule 127.0.0.1 est standardisée comme “localhost”, mais techniquement,
+	toutes les adresses du bloc 127/8 peuvent être utilisées localement, mais
+	jamais pour la communication réseau entre machines.
+
+2. Autres adresses réservées ou spéciales en IPv4
+	Voici les principaux blocs réservés (RFC 5735, RFC 6890) :
+	Bloc IP	Usage	Exemple(s)
+	0.0.0.0/8	Réseau non spécifié	0.0.0.0
+	10.0.0.0/8	Privé (RFC 1918)	10.0.0.1
+	127.0.0.0/8	Loopback	127.0.0.1, 127.1.2.3
+	169.254.0.0/16	Link-local (APIPA)	169.254.1.1
+	172.16.0.0/12	Privé (RFC 1918)	172.16.0.1 à 172.31.255.255
+	192.0.0.0/24	IETF protocol assignments	192.0.0.1
+	192.0.2.0/24	TEST-NET-1 (documentation)	192.0.2.1
+	192.168.0.0/16	Privé (RFC 1918)	192.168.1.1
+	198.18.0.0/15	Benchmarking	198.18.1.1
+	224.0.0.0/4	Multicast	224.0.0.1
+	240.0.0.0/4	Réservé pour usage futur	240.0.0.1
+	255.255.255.255	Broadcast limité	—
+
+3. Sources
+	IANA (Internet Assigned Numbers Authority) → https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml
+	RFC 5735 → https://datatracker.ietf.org/doc/html/rfc5735
+	RFC 6890 → https://datatracker.ietf.org/doc/html/rfc6890 (plus complet)

@@ -1,0 +1,38 @@
+4 ordinateurs 
+4 IP (une pour chacune des machines)
+4 Mask (un pour chacune des machines)
+
+Amorcer une connection entre deux ordinateurs en changeant
+l'IP d'une des deux machines.
+
+Toutes les machines ont le mask suivant :
+    -> 255.255.255.0
+
+Exemple :
+
+    Machine_1 :
+        -> IP : 104.95.23.12
+        -> Mask : 255.255.255.0
+
+    Machine_2 :
+        -> IP : ?
+        -> Mask : 255.255.255.0
+
+    Quelles IP mettre pour amorcer une connection ?
+    Comment le construire en fonction du Mask et de l'IP
+    de l'autre machine ?
+
+
+    (Explications d'apres les tests fait)
+
+    Garder les 3 premiers nombres et changer le 4 eme avec
+    une valeur proche (peut-etre entre 0 et 255).
+
+    Les 3 premiers nombres ont l'air d'etre pour le reseau
+    alors que le dernier a l'air de plus correspondre a
+    la machine.
+
+    Y a t il donc de 0 a 255 possibilites ?
+
+    Tout les nombre compris dans cette intervalle avec 0
+    et 255 compris sont ils utilisable ?

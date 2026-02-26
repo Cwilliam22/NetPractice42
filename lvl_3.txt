@@ -1,0 +1,48 @@
+
+Connection entre 3 machines mais par le biais d'un switch.
+
+--------------------------------------------------------------------------------
+C'est quoi un switch ?
+
+Un switch (commutateur réseau) est un périphérique de couche 2 (Data Link) qui
+relie plusieurs appareils sur un même réseau local (LAN).
+Il transmet les trames Ethernet uniquement vers le port destinataire, en se basant
+sur les adresses MAC des machines.
+
+Contrairement à un hub (obsolète), un switch ne diffuse pas le trafic à tous les
+ports → plus efficace et sécurisé.
+
+
+--------------------------------------------------------------------------------
+Comment ca fonctionne ?
+
+Apprentissage des adresses MAC :
+	Le switch construit une table MAC en observant les adresses source des trames
+	entrantes.
+
+	Filtrage et forwarding :
+	Quand il reçoit une trame, il regarde l’adresse MAC de destination :
+		Si elle est dans sa table → il envoie la trame uniquement sur le bon port.
+		Si elle n’est pas connue → il diffuse la trame sur tous les ports (sauf
+		celui d’origine) → appelé flooding.
+
+	Pas d’adresse IP nécessaire :
+	Le switch travaille en couche 2 → il n’a pas besoin d’IP pour fonctionner (sauf
+	pour la gestion réseau).
+
+	Exemple : Machine A envoie une trame à Machine B → le switch envoie uniquement
+	vers le port de Machine B → pas de bruit sur les autres ports.
+
+
+--------------------------------------------------------------------------------
+Quelles changements cela amene a mon reseau ?
+
+Avec un switch (au lieu d’une connexion directe point à point ou d’un hub) :
+
+Avantages :
+
+	Meilleure performance : pas de collision, chaque lien est indépendant.
+	Sécurité améliorée : le trafic n’est pas broadcasté à toutes les machines.
+	Évolutivité : vous pouvez connecter plus de 2 machines (ex. 3, 10, 24…).
+	Pas besoin de changer les IP : les machines restent dans le même sous-réseau
+	(ex. 192.168.1.0/24).
