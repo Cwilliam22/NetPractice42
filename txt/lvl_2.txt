@@ -107,3 +107,84 @@ une autre en utilisant ces adresses.
 	IANA (Internet Assigned Numbers Authority) → https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml
 	RFC 5735 → https://datatracker.ietf.org/doc/html/rfc5735
 	RFC 6890 → https://datatracker.ietf.org/doc/html/rfc6890 (plus complet)
+
+
+--------------------------------------------------------------------------------
+Methode pour calculer l'IP d'apres le Mask de sous reseau 
+
+
+
+	Identifier le réseau :
+	Appliquer le masque de sous-réseau (en binaire) à l’adresse IP de référence (ou à n’importe quelle IP du réseau) pour obtenir l’adresse réseau.
+
+	Choisir deux adresses IP valides :
+	Dans ce réseau, choisir deux adresses IP différentes, non réservées (ni l’adresse réseau, ni l’adresse de broadcast), et dans la même plage.
+
+
+Situation :
+
+Tu as une machine avec l’IP 192.168.45.222 et le masque 255.255.255.224 (soit /27).
+Tu veux savoir quelle est la plage du réseau dans lequel elle se trouve — et donc quelles autres IPs peuvent lui parler.
+Étape 1 : Trouver l’adresse réseau
+
+Le masque 255.255.255.224 = /27 → 27 bits réseau, 5 bits hôtes.
+
+On va appliquer le masque à l’IP 192.168.45.222 pour trouver le réseau.
+En binaire :
+
+IP :
+192.168.45.222 → 11000000.10101000.00101101.11011110
+
+Masque :
+255.255.255.224 → 11111111.11111111.11111111.11100000
+
+→ AND logique :
+
+plain text
+
+11000000.10101000.00101101.11011110
+AND
+11111111.11111111.11111111.11100000
+=
+11000000.10101000.00101101.11000000
+
+→ En décimal : 192.168.45.192
+Adresse réseau = 192.168.45.192
+📏 Étape 2 : Trouver la plage utilisable
+
+    Taille du réseau = 2⁵ = 32 adresses
+    Adresse réseau : 192.168.45.192
+    Adresse broadcast = 192.168.45.192 + 31 = 192.168.45.223
+    Plage utilisable : 192.168.45.193 → 192.168.45.222
+
+    Oui, 192.168.45.222 est bien la dernière IP utilisable dans ce réseau !
+
+🖥️ Donc, pour une autre machine :
+
+Tu peux lui donner n’importe quelle IP entre 192.168.45.193 et 192.168.45.222, sauf 222 si tu veux l’attribuer à la première machine.
+
+Exemple :
+
+    Machine 1 : 192.168.45.222
+    Machine 2 : 192.168.45.200
+    Masque : 255.255.255.224 pour les deux.
+
+→ Elles sont dans le même réseau → elles peuvent se connecter.
+Pourquoi la plage est-elle décalée ?
+
+Parce que le réseau est défini par l’adresse réseau, pas par une IP aléatoire.
+
+→ 192.168.45.222 n’est pas dans le réseau 192.168.45.0/27, mais dans 192.168.45.192/27.
+
+Les réseaux /27 sont découpés tous les 32 adresses :
+
+python
+
+192.168.45.0     → 192.168.45.31
+192.168.45.32    → 192.168.45.63
+192.168.45.64    → 192.168.45.95
+...
+192.168.45.192   → 192.168.45.223 ← ton réseau
+192.168.45.224   → 192.168.45.255
+
+→ Donc oui, la plage est décalée — elle dépend de l’adresse réseau, pas de l’IP qu’on te donne.

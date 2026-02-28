@@ -1,0 +1,5 @@
+
+Deux machines, un switch et un routeur
+
+Le routeur a 3 interfaces possedant chacune un IP et un Mask
+--------------------------------------------------------------------------------
