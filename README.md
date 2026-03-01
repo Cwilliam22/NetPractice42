@@ -10,7 +10,7 @@ NetPractice is a hands-on networking training tool designed to help learners mas
 
 The goal is to reinforce understanding of core networking principles — including TCP/IP addressing, OSI model layers, subnetting, routing, and device configuration — by applying them in practical, scenario-based exercises.
 
-### Installation
+### Installation and Instructions
 
 1. Download the folder on intra42.
 ```
@@ -61,9 +61,14 @@ Before proceeding to the next level, always export your configuration using the 
 
 
 ## References
-- [gitbook.io](https://42-cursus.gitbook.io/guide/4-rank-04/minirt) - Official MiniRT project guide in the 42 curriculum
-- [medium.com](https://medium.com/@iremoztimur/building-a-minirt-42-project-part-1-ae7a00aebdb9) - Detailed tutorial on building a ray tracer from scratch
-- [scratchapixel.com](https://www.scratchapixel.com/) - Ray tracing fundamentals explained step by step
-- [raytracing.github.io](https://raytracing.github.io/) - Free book “Ray Tracing in One Weekend”, perfect for getting started
-- [github.com](https://github.com/) - Open-source MiniRT implementation with helpful comments
-- [42born2code.slack.com](https://42born2code.slack.com/) - Discussions and tips about MiniRT within the 42 community (access required)
+- [gitbook.io](https://42-cursus.gitbook.io/guide/4-rank-04/netpractice) - A practical guide explaining the NetPractice project and networking concepts for 42 students.
+- [medium.com](https://medium.com/@imyzf/netpractice-2d2b39b6cf0a) - A detailed article sharing insights and explanations about solving NetPractice exercises.
+- [github.com](https://github.com/tblaase/Net_Practice) - A repository containing solutions and resources related to the Net_Practice project.
+- [wikipedia.org](https://fr.wikipedia.org/wiki/Sous-r%C3%A9seau) - An overview explaining what a subnet is and how network segmentation works.
+- [wikipedia.org](https://fr.wikipedia.org/wiki/Transmission_Control_Protocol) - A comprehensive explanation of the Transmission Control Protocol and how it ensures reliable communication.
+- [netgear.com](https://kb.netgear.com/fr/232/Qu-est-ce-qu-un-switch-Une-introduction) - An introductory article explaining what a network switch is and how it functions.
+- [fortinet.com](https://www.fortinet.com/fr/resources/cyberglossary/tcp-ip) - A cybersecurity-focused explanation of the TCP/IP model and its core principles.
+- [virginmedia.com](https://www.virginmedia.com/the-edit/comparisons/modem-vs-router) - A comparison article explaining the difference between a modem and a router.
+- [ionos.fr](https://www.ionos.fr/digitalguide/serveur/know-how/subnetting-comment-fonctionnent-les-sous-reseaux/) - A technical guide explaining subnetting and how subnetworks operate.
+- [calculator.net](https://www.calculator.net/ip-subnet-calculator.html) - An interactive IP subnet calculator for quickly determining subnet ranges and details.
+- [euria.infomaniak.com](https://euria.infomaniak.com/) - Infomaniak's AI, used to resolve misunderstandings at the subnet mask and IP range level.
